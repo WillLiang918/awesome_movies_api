@@ -14,3 +14,8 @@ awkward high school student gains spider-like abilities that he \
 eventually must use to fight evil as a superhero after tragedy \
 befalls his family."
 )
+
+Actor.create!(name: "Tobey Maguire")
+Actor.create!(name: "James Franco")
+Casting.create!(movie_id: 1, actor_id: 1)
+Casting.create!(movie_id: 1, actor_id: 2)
