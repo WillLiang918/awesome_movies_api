@@ -9,8 +9,8 @@
 Movie.create!(
   title: "Spider-Man",
   year: 2002,
-  synopsis: "When bitten by a genetically modified spider, a nerdy, shy, and
-            awkward high school student gains spider-like abilities that he
-            eventually must use to fight evil as a superhero after tragedy
-            befalls his family."
+  synopsis: "When bitten by a genetically modified spider, a nerdy, shy, and \
+awkward high school student gains spider-like abilities that he \
+eventually must use to fight evil as a superhero after tragedy \
+befalls his family."
 )
