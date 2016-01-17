@@ -6,16 +6,19 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Movie.create!(
-  title: "Spider-Man",
-  year: 2002,
-  synopsis: "When bitten by a genetically modified spider, a nerdy, shy, and \
-awkward high school student gains spider-like abilities that he \
-eventually must use to fight evil as a superhero after tragedy \
-befalls his family."
-)
-
 Actor.create!(name: "Tobey Maguire")
 Actor.create!(name: "James Franco")
-Casting.create!(movie_id: 1, actor_id: 1)
-Casting.create!(movie_id: 1, actor_id: 2)
+
+5.times do |i|
+  Movie.create!(
+  title: "Spider-Man #{i+1}",
+  year: 2002,
+  synopsis: "When bitten by a genetically modified spider, a nerdy, shy, and \
+  awkward high school student gains spider-like abilities that he \
+  eventually must use to fight evil as a superhero after tragedy \
+  befalls his family."
+  )
+
+  Casting.create!(movie_id: (i + 1), actor_id: 1)
+  Casting.create!(movie_id: (i + 1), actor_id: 2)
+end

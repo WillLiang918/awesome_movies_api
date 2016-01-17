@@ -14,6 +14,8 @@ gem 'rack-cors'
 
 gem 'active_model_serializers', '~> 0.8.1'
 
+gem "paperclip", "~> 4.3"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
