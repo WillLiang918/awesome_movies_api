@@ -16,7 +16,10 @@ Actor.create!(name: "James Franco")
   synopsis: "When bitten by a genetically modified spider, a nerdy, shy, and \
   awkward high school student gains spider-like abilities that he \
   eventually must use to fight evil as a superhero after tragedy \
-  befalls his family."
+  befalls his family.",
+  poster: File.open(
+      "#{Rails.root}/app/assets/images/spider_man_2002.jpg", 'r'
+    )
   )
 
   Casting.create!(movie_id: (i + 1), actor_id: 1)
