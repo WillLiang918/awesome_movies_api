@@ -11,13 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160117020520) do
+ActiveRecord::Schema.define(version: 20160117031437) do
 
   create_table "actors", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "api_keys", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "access_token"
+  end
+
+  add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true
+  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id"
 
   create_table "castings", force: :cascade do |t|
     t.integer  "movie_id",   null: false
@@ -41,5 +49,19 @@ ActiveRecord::Schema.define(version: 20160117020520) do
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "username"
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "session_token"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end
