@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160117031437) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "actors", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -24,8 +27,8 @@ ActiveRecord::Schema.define(version: 20160117031437) do
     t.string  "access_token"
   end
 
-  add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true
-  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id"
+  add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true, using: :btree
+  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
 
   create_table "castings", force: :cascade do |t|
     t.integer  "movie_id",   null: false
@@ -35,8 +38,8 @@ ActiveRecord::Schema.define(version: 20160117031437) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "castings", ["actor_id"], name: "index_castings_on_actor_id"
-  add_index "castings", ["movie_id"], name: "index_castings_on_movie_id"
+  add_index "castings", ["actor_id"], name: "index_castings_on_actor_id", using: :btree
+  add_index "castings", ["movie_id"], name: "index_castings_on_movie_id", using: :btree
 
   create_table "movies", force: :cascade do |t|
     t.string   "title",               null: false
@@ -60,8 +63,8 @@ ActiveRecord::Schema.define(version: 20160117031437) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end
