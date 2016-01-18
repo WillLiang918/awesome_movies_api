@@ -1,29 +1,26 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'csv'
 
-Actor.create!(name: "Tobey Maguire")
-Actor.create!(name: "James Franco")
+CSV.foreach("#{Rails.root}/lib/data/actors.csv") do |row|
+  Actor.create!(name: row[0])
+end
 
-10.times do |i|
-  Movie.create!(
-    title: "Spider-Man #{i+1}",
-    year: 2002,
-    synopsis: "When bitten by a genetically modified spider, a nerdy, shy, and \
-    awkward high school student gains spider-like abilities that he \
-    eventually must use to fight evil as a superhero after tragedy \
-    befalls his family.",
-    poster: File.open(
-        "#{Rails.root}/app/assets/images/spider_man_2002.jpg", 'r'
+CSV.foreach("#{Rails.root}/lib/data/movies.csv") do |row|
+   Movie.create!(
+     title: row[0],
+     year: row[1],
+     poster: File.open("#{Rails.root}/app/assets/images/" + row[2]),
+     synopsis: row[3],
+   )
+end
+
+CSV.foreach("#{Rails.root}/lib/data/casting.csv") do |row|
+  row[1].split(", ").each do |actor|
+    puts "row: #{row}, actor: #{actor}, movie: #{row[0]}"
+    Casting.create!(
+      movie_id: Movie.where("title LIKE ?", row[0]).first.id,
+      actor_id: Actor.where("name LIKE ?", actor).first.id
     )
-  )
-
-  Casting.create!(movie_id: (i + 1), actor_id: 1)
-  Casting.create!(movie_id: (i + 1), actor_id: 2)
+  end
 end
 
 User.create!(
@@ -32,7 +29,3 @@ User.create!(
   email: "joe_user@example.com",
   password: "password"
 )
-#
-# ApiKey.create(
-#   user_id: 1,
-# )

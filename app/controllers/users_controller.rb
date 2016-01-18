@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if user.new_record?
       render json: {}, status: 422
     else
-      render json: user.session_api_key, status: 201
+      render json: user.reset_token!, status: 201
     end
   end
 

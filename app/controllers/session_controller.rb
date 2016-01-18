@@ -6,7 +6,7 @@ class SessionController < ApplicationController
                 ).first
 
     if user && user.authenticate.(params[:password])
-      render json: user.session_api_key, status: 201
+      render json: user.reset_token!, status: 201
     else
       render json: {}, status: 401
     end

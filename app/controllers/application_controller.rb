@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
   def current_user
     token = request.headers['X-Api-Key']
     return true if token == "BdLLjmwxgUordMICMHoUcwtt"
-    api_key = ApiKey.active.where(access_token: token).first
+    api_key = ApiKey.where(access_token: token).first
     api_key ? api_key.user : nil
   end
 end
