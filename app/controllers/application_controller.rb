@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   def authenticate
     unless current_user
-      head status: :unauthorized
+      render json: "A valid API key is required", status: :unauthorized
       return false
     end
   end
