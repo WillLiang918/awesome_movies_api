@@ -6,17 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :api_keys
 
-  # attr_reader :password
-  #
-  # def password=(password)
-  #   @password = password
-  #   self.password_digest = BCrypt::Password.create(password)
-  # end
-  #
-  # def is_password?(password)
-  #   BCrypt::Password.new(self.password_digest).is_password?(password)
-  # end
-
   def generate_token
     SecureRandom.urlsafe_base64
   end
@@ -31,8 +20,4 @@ class User < ActiveRecord::Base
     self.session_token
   end
 
-  # private
-  #   def session_api_key
-  #     self.session_token.first_or_create
-  #   end
 end
